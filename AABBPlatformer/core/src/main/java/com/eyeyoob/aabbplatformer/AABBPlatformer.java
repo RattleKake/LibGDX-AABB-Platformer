@@ -59,9 +59,9 @@ class Player {
 
     private boolean overlapOffset(Rectangle otherRect, float xOffset, float yOffset) {
         return rect.x + xOffset < otherRect.x + otherRect.width &&
-            rect.x + rect.width + xOffset > otherRect.x &&
-            rect.y + yOffset < otherRect.y + otherRect.height &&
-            rect.y + rect.height + yOffset > otherRect.y;
+                rect.x + rect.width + xOffset > otherRect.x &&
+                rect.y + yOffset < otherRect.y + otherRect.height &&
+                rect.y + rect.height + yOffset > otherRect.y;
     }
 
     public void update() {
@@ -123,9 +123,12 @@ class Player {
         }
 
         // Update isGrounded variables
-        isGrounded = groundedThisFrame;
-
-        System.out.println(isGrounded);
+        if (!isGrounded && groundedThisFrame) {
+            isGrounded = true;
+        }
+        else if (isGrounded && !groundedThisFrame) {
+            isGrounded = false;
+        }
 
         // Update X and Y position
         rect.x += velocityX;
@@ -147,21 +150,21 @@ public class AABBPlatformer extends ApplicationAdapter {
     Player player;
     ShapeRenderer shapeRenderer;
     String[] map = new String[] {
-        "XXXXXXXXXXXXXXXXXXXX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOOOOOOOOOOOX",
-        "XOOOOOOOOXOOOOOOOOOX",
-        "XOOOOXOO0XOOOXOOOOOX",
-        "XXXXXXXXXXXXXXXXXXXX"
+            "XXXXXXXXXXXXXXXXXXXX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOOOOOOOOOOOX",
+            "XOOOOOOOOXOOOOOOOOOX",
+            "XOOOOXOO0XOOOXOOOOOX",
+            "XXXXXXXXXXXXXXXXXXXX"
     };
 
 
